@@ -3,6 +3,7 @@ module Presentation.Menu where
 import Business.MatchHandler
 import Domain.Match
 import Domain.TeamResults
+import Text.Read
 
 menu :: IO ()
 menu = do
@@ -103,13 +104,17 @@ showTeamResultByRound = do
     team <- getLine
     putStrLn "Digite a rodada"
     strRound <- getLine
-    let round = read strRound
-    results <- getMatchesResultsByRoundAndByTeamInChampionship round team
-    putStrLn ""
+    let round = readMaybe strRound :: Maybe Int
 
-    putStrLn ("As partidas da rodada " ++ (show round) ++ " foram:")
-    putStrLn ""
-    showMatchList (reverse results)
+    case round of
+        Just r -> do
+            results <- getMatchesResultsByRoundAndByTeamInChampionship r team
+            putStrLn ""
+
+            putStrLn ("As partidas da rodada " ++ (show r) ++ " foram:")
+            putStrLn ""
+            showMatchList (reverse results)
+        Nothing -> putStrLn "Número inválido"
 
 showMatchList :: [Match] -> IO ()
 showMatchList [] = do
