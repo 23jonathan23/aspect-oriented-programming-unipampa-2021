@@ -158,7 +158,7 @@ showTeamResultsList (h:t) = do
     putStr ((show (classification h)) ++ ", " ++ name h ++ ", pontos: ")
     putStr ((show (totalPoints h)) ++ ", vitórias: " ++ (show (victories h)))
     putStr (", empates: " ++ (show (draws h)) ++ ", derrotas: " ++ (show (loss h)))
-    putStr (", gols feitos: " ++ (show (goalsFor h)) ++ ", goals tomados: " ++ (show (goalsAgainst h)))
+    putStr (", gols pro: " ++ (show (goalsFor h)) ++ ", gols contra: " ++ (show (goalsAgainst h)))
     putStr (", saldo de gols: " ++ (show (goalsDifference h)))
     putStrLn ""
 
