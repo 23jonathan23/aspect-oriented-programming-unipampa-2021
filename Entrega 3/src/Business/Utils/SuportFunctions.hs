@@ -2,6 +2,8 @@
 module Business.Utils.SuportFunctions where
 
 import Domain.Match
+    ( Match(principalGoals, strangerGoals, principalTeam, strangerTeam,
+            currentRound) )
 import Domain.TeamResults
 
 import Infra.Repositories.MatchRepository
@@ -92,8 +94,9 @@ getGoalsForByTeam teamName teamMatch
 getGoalsAgainstByTeam :: String -> Match -> Int
 getGoalsAgainstByTeam teamName teamMatch = do
     let goalAgainst = principalGoals teamMatch - strangerGoals teamMatch
+    let goalAgainstPositive = filterGoalsAgainst goalAgainst
 
-    goalAgainst
+    goalAgainstPositive
 
 --Retorna a soma de todos os gols contras de cada partida
 sumGoalsAgainstByTeam :: String -> [Match] -> Int
@@ -123,6 +126,13 @@ filterTeamResultsByTeam teamName teamResults = head (filter (\teamResults -> tea
 filterTeamByTop :: Int -> [TeamResults] -> [TeamResults]
 filterTeamByTop top [] = []
 filterTeamByTop top teamResults = filter (\teamResults -> classification teamResults <= top) teamResults
+
+--Função para tratar os gols contras que estavam retornando negativos
+filterGoalsAgainst :: Int->Int
+filterGoalsAgainst goal
+    |goal < 0 = -1 * goal
+    |otherwise = goal
+
 
 --Retonar os resultados de um determinado time
 getTeamResultsByTeam :: String -> [Match] -> TeamResults
