@@ -1,13 +1,11 @@
-package com.sales.online.games.salesonlinegames;
+package com.sales.online.games.salesonlinegames.Presentation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SalesOnlineGamesApplication {
-
+public class Startup {
 	public static void main(String[] args) {
-		SpringApplication.run(SalesOnlineGamesApplication.class, args);
+		SpringApplication.run(Startup.class, args);
 	}
-
 }
