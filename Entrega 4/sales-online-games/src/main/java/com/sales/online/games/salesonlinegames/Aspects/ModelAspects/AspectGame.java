@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class AspectGame {
     
-    @Around("execution (* setName(name,..))")
+    @Around("execution (* setName(..))")
     public void around(ProceedingJoinPoint joinPoint) {
         Object[] obj = joinPoint.getArgs();
 
