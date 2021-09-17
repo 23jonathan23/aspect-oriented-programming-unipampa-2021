@@ -1,3 +1,5 @@
+package com.sales.online.games.salesonlinegames.Model;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
