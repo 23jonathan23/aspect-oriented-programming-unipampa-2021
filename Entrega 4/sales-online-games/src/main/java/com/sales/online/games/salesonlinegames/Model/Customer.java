@@ -64,16 +64,8 @@ public class Customer{
         return this.platforms;
     }
 
-    public void setPlatforms(List<Platforms> platforms) {
-        this.platforms = platforms;
-    }
-
     public List<Genders> getGendersPref() {
         return this.gendersPref;
-    }
-
-    public void setGendersPref(List<Genders> gendersPref) {
-        this.gendersPref = gendersPref;
     }
 
     public Address getAddress() {
@@ -111,7 +103,4 @@ public class Customer{
 
         return gendersPref.remove(gender);
     }
-
-
-
 }
