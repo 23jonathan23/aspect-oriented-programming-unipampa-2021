@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import com.sales.online.games.salesonlinegames.Model.Support.Address;
 import com.sales.online.games.salesonlinegames.Model.Support.Genders;
-import com.sales.online.games.salesonlinegames.Model.Support.Platforms;
+import com.sales.online.games.salesonlinegames.Presentation.Model.Platforms;
 
 public class Customer{
 
@@ -64,8 +64,16 @@ public class Customer{
         return this.platforms;
     }
 
+    public void setPlatforms(List<Platforms> platforms) {
+        this.platforms = platforms;
+    }
+
     public List<Genders> getGendersPref() {
         return this.gendersPref;
+    }
+
+    public void setGendersPref(List<Genders> gendersPref) {
+        this.gendersPref = gendersPref;
     }
 
     public Address getAddress() {
@@ -103,4 +111,7 @@ public class Customer{
 
         return gendersPref.remove(gender);
     }
+
+
+
 }
