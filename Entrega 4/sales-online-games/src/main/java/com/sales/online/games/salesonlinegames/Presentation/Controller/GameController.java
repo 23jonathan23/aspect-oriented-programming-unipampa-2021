@@ -1,8 +1,9 @@
 package com.sales.online.games.salesonlinegames.Presentation.Controller;
 
-import java.util.List;
-
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,44 +12,49 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sales.online.games.salesonlinegames.Presentation.Model.Game;
-import com.sales.online.games.salesonlinegames.Presentation.Service.GameService;
+import com.sales.online.games.salesonlinegames.Domain.Application.GameService;
+import com.sales.online.games.salesonlinegames.Domain.Core.Game;
+import com.sales.online.games.salesonlinegames.Domain.Core.Request.CreateGameRequest;
 
 @RestController
 public class GameController {
     
-    private final GameService gameService;
-
     @Autowired
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
-    }
+    GameService gameService;
 
-    @GetMapping
-    public List<Game> selectGames() {
-        return gameService.selectGames();
-    }
+    @GetMapping("/{gameId}")
+    public ResponseEntity<Object> getGameById(@PathVariable long gameId) {
+        var response = gameService.findById(gameId);
 
-    @GetMapping(value = "/{id}")
-    public Game selectGame(@PathVariable long id) {
-        return gameService.selectGame(id);
+        return response != null
+            ? new ResponseEntity<>(response ,HttpStatus.OK)
+            : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found.");
     }
 
     @PostMapping
-    public void insertGame(@RequestBody Game game) {
+    public ResponseEntity<Game> createGame(@RequestBody CreateGameRequest request) {
+        var game = new Game();
         
-        gameService.insertGame(game);
+        BeanUtils.copyProperties(request, game);
+
+        return new ResponseEntity<>(gameService.createGame(game), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/{id}")
-    public void updateGame(@PathVariable long id, @RequestBody Game game) {
+    @PutMapping("/{gameId}")
+    public ResponseEntity<Object> updateGame(@PathVariable long gameId, @RequestBody Game request) {
+        var response = gameService.updateGame(gameId, request);
 
-        gameService.updateGame(id, game);
+        return response != null
+            ? new ResponseEntity<>(response ,HttpStatus.OK)
+            : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found.");
+
+        
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void deleteGame(@PathVariable long id) {
+    @DeleteMapping("/{gameId}")
+    public ResponseEntity<Object> deleteGame(@PathVariable long gameId) {
+        gameService.deleteGame(gameId);
 
-        gameService.deleteGame(id);
+        return ResponseEntity.status(HttpStatus.OK).body("");
     }
 }
