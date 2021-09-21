@@ -7,6 +7,7 @@ import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.GameGenre;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.Platform;
 
 public class Game{
+    private long gameId;
     private String name;
     private String description;
     private GameGenre gameGenre;
@@ -23,6 +24,14 @@ public class Game{
         this.gameGenre = gameGenre;
         this.developer = developer;
         this.release = release;
+    }
+
+    public long getGameId() {
+        return this.gameId;
+    }
+
+    public void setGameId(long gameId) {
+        this.gameId = gameId;
     }
 
     public String getName() {
