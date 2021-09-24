@@ -1,6 +1,7 @@
 package com.sales.online.games.salesonlinegames.Domain.Core;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.GameGenre;
@@ -42,7 +43,7 @@ public class Game{
         return description;
     }
 
-    public GameGenre getGender() {
+    public GameGenre getGameGenre() {
         return gameGenre;
     }
 
@@ -70,18 +71,25 @@ public class Game{
         this.description = description;
     }
 
-    public void setGender(GameGenre gameGenre) {
+    public void setGameGenre(GameGenre gameGenre) {
         this.gameGenre = gameGenre;
     }
 
-    public void removePlatform(Platform platform) {
-        if (platforms.contains(platform))
-            platforms.remove(platform);
+    public void setPlatforms(List<Platform> platforms) {
+        if(this.platforms == null)
+            this.platforms = new ArrayList<>();
+
+        for(var platform : platforms)
+            if (!this.platforms.contains(platform))
+                    this.platforms.add(platform);
     }
 
-    public void addPlatform(Platform platform) {
-        if (!platforms.contains(platform))
-                platforms.add(platform);
+    public void setPlatform(Platform platform) {
+        if(this.platforms == null)
+            this.platforms = new ArrayList<>();
+
+        if (!this.platforms.contains(platform))
+                this.platforms.add(platform);
     }
 
     public void setDeveloper(String developer) {

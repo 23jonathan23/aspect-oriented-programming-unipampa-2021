@@ -2,7 +2,6 @@ package com.sales.online.games.salesonlinegames.Presentation.Configuration;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.GameService;
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IGameRepository;
-import com.sales.online.games.salesonlinegames.Infra.Repositories.GamePlatformRepository;
 import com.sales.online.games.salesonlinegames.Presentation.Startup;
 
 import org.modelmapper.ModelMapper;
@@ -15,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    GameService gameService(IGameRepository gameRepository, GamePlatformRepository gamePlatformRepository) {
-        return new GameService(gameRepository, gamePlatformRepository);
+    GameService gameService(IGameRepository gameRepository) {
+        return new GameService(gameRepository);
     }
 
     @Bean

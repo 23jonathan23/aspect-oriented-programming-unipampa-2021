@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,8 +20,11 @@ import java.io.Serializable;
 @Entity
 @Table(name = "game")
 public class GameEntity implements Serializable {
+    public static final Long serialVersionUID = 1L;
+
     @Id
     @Column(name = "gameid")
+    @GeneratedValue(strategy= GenerationType.AUTO, generator = "game_gameid_seq")
     public long gameId;
 
     public String name;
@@ -27,11 +32,13 @@ public class GameEntity implements Serializable {
     public String description;
 
     @Enumerated
-    public GameGenre gameGenreId;
+    @Column(name = "gamegenreid")
+    public GameGenre gameGenre;
 
     public String developer;
 
     public LocalDate release;
 
-    public long priceInCents;
+    @Column(name = "priceincents")
+    public long price;
 }

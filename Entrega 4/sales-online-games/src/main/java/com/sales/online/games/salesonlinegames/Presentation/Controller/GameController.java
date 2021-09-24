@@ -10,17 +10,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.GameService;
 import com.sales.online.games.salesonlinegames.Domain.Core.Game;
 import com.sales.online.games.salesonlinegames.Domain.Core.Request.CreateGameRequest;
 
 @RestController
+@RequestMapping("game")
 public class GameController {
     
     @Autowired
     GameService gameService;
+
+    @GetMapping("")
+    public ResponseEntity<Object> getAll() {
+        var response = gameService.getAll();
+
+        return new ResponseEntity<>(response ,HttpStatus.OK);
+    }
 
     @GetMapping("/{gameId}")
     public ResponseEntity<Object> getGameById(@PathVariable long gameId) {
@@ -32,7 +43,7 @@ public class GameController {
     }
 
     @PostMapping
-    public ResponseEntity<Game> createGame(@RequestBody CreateGameRequest request) {
+    public ResponseEntity<Game> createGame(@RequestBody @Valid CreateGameRequest request) {
         var game = new Game();
         
         BeanUtils.copyProperties(request, game);
@@ -46,15 +57,15 @@ public class GameController {
 
         return response != null
             ? new ResponseEntity<>(response ,HttpStatus.OK)
-            : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found.");
-
-        
+            : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found.");   
     }
 
     @DeleteMapping("/{gameId}")
     public ResponseEntity<Object> deleteGame(@PathVariable long gameId) {
-        gameService.deleteGame(gameId);
+        var response = gameService.deleteGame(gameId);
 
-        return ResponseEntity.status(HttpStatus.OK).body("");
+        return response.isPresent()
+            ? ResponseEntity.status(HttpStatus.OK).body("")
+            : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found.");
     }
 }

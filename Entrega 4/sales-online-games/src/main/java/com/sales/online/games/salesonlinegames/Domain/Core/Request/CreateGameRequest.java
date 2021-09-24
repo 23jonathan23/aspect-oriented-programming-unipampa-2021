@@ -1,28 +1,32 @@
 package com.sales.online.games.salesonlinegames.Domain.Core.Request;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.GameGenre;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.Platform;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class CreateGameRequest {
     @NotBlank
-    private String name;
+    public String name;
 
     @NotBlank
-    private String description;
+    public String description;
+
+    @NotNull
+    public GameGenre gameGenre;
+
+    @NotNull
+    public List<Platform> platforms;
 
     @NotBlank
-    private GameGenre gameGenre;
+    public String developer;
 
-    @NotBlank
-    private List<Platform> platforms;
-
-    @NotBlank
-    private String developer;
-
-    @NotBlank
-    private long price;
+    @NotNull
+    public long price;
 }

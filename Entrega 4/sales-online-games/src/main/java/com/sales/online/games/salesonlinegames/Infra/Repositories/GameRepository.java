@@ -2,20 +2,24 @@ package com.sales.online.games.salesonlinegames.Infra.Repositories;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IGameRepository;
 import com.sales.online.games.salesonlinegames.Domain.Core.Game;
 import com.sales.online.games.salesonlinegames.Infra.Repositories.Entities.GameEntity;
 
-@Repository
+@Component
+@Primary
 public class GameRepository implements IGameRepository {
 
-    private final PostgresRepository<GameEntity> repository;
+    private final SpringDataPostgresGameRepository repository;
 
-    public GameRepository(final PostgresRepository<GameEntity> repository) {
+    public GameRepository(final SpringDataPostgresGameRepository repository) {
         this.repository = repository;
     }
 
@@ -49,5 +53,16 @@ public class GameRepository implements IGameRepository {
             return Optional.of(modelMapper.map(gameEntity.get(), Game.class));
         else
             return Optional.empty();
+    }
+
+    public List<Game> getAll() {
+        var games = repository.findAll();
+
+        var response = new ArrayList<Game>();
+
+        for(var game : games)
+            response.add(modelMapper.map(game, Game.class));
+
+        return response;
     }
 }
