@@ -1,16 +1,22 @@
 package com.sales.online.games.salesonlinegames.Infra.Repositories.Entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.GameGenre;
+import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.Platform;
 
 import lombok.Data;
 
@@ -34,6 +40,12 @@ public class GameEntity implements Serializable {
     @Enumerated
     @Column(name = "gamegenreid")
     public GameGenre gameGenre;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "gameplatform",
+            joinColumns = { @JoinColumn(name = "gameid") },
+            inverseJoinColumns = { @JoinColumn(name = "platformid") })
+    public List<Platform> platforms;
 
     public String developer;
 

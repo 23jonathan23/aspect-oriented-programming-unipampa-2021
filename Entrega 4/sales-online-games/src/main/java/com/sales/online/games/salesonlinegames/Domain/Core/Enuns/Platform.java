@@ -1,5 +1,11 @@
 package com.sales.online.games.salesonlinegames.Domain.Core.Enuns;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "platform")
 public enum Platform {
     WINDOWS, 
     MAC, 
@@ -10,5 +16,6 @@ public enum Platform {
     PLAYSTATION4, 
     NINTENDO_SWITH;
 
-    public final int value = 1 + ordinal();
+    @Id
+    public final long value = 1 + this.ordinal();
 }
