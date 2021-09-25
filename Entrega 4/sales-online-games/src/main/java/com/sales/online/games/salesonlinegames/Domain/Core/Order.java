@@ -1,13 +1,15 @@
 package com.sales.online.games.salesonlinegames.Domain.Core;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.OrderStatus;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.PaymentMethod;
 
 public class Order {
-    private List<Game> games;
+    public long orderId;
+    private List<Game> games = new ArrayList<>();
     private Card card;
     private PaymentMethod paymentMethod;
     private int installment;
@@ -15,34 +17,55 @@ public class Order {
     private String coupon;
     private OrderStatus status;
     private long customerId;
+    private long amount;
 
-    Order(Card creditCard, PaymentMethod paymentMethod, int installment, LocalDate purchaseDate, OrderStatus status){
-        this.card = creditCard;
+    public Order(){ }
+
+    public Order(Card card, PaymentMethod paymentMethod, int installment, LocalDate purchaseDate, OrderStatus status){
+        this.card = card;
         this.installment = installment;
         this.paymentMethod = paymentMethod;
         this.purchaseDate = purchaseDate;
         this.status = status;
     }
 
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
     public List<Game> getGames() {
         return this.games;
     }
 
-    public boolean removeGames(Game game) {
-        return games.remove(game);
+    public void setGames(List<Game> games) {
+        for(var game : games)
+            if (!this.games.contains(game))
+                    this.games.add(game);
     }
 
-    public void addGames(Game game) {
-        if (games.contains(game))
-            games.add(game);
+    public void setGame(Game game) {
+        if (!this.games.contains(game))
+                this.games.add(game);
     }
 
-    public Card getCreditCard() {
+    public Card getCard() {
         return this.card;
     }
 
-    public void setCreditCard(Card creditCard) {
-        this.card = creditCard;
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     public PaymentMethod getPaymentMethod() {
