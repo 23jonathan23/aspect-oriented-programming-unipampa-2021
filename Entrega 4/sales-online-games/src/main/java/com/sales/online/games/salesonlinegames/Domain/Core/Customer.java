@@ -13,6 +13,8 @@ public class Customer{
     private List<GameGenre> favoriteGenres;
     private Address address;
 
+    public Customer () { }
+
     public Customer(String name, String email, LocalDate birthDate, Address address){
         this.name = name;
         this.email = email;
