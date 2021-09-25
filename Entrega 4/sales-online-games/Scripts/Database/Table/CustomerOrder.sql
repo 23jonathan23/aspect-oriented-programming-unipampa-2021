@@ -8,6 +8,6 @@ CREATE TABLE CustomerOrder (
     CustomerId INTEGER NOT NULL REFERENCES Customer(CustomerId),
     PurchaseDate DATE NOT NULL,
     OrderStatusId INTEGER NOT NULL REFERENCES OrderStatus(OrderStatusId),
-    Cupom VARCHAR(10) NULL,
+    Coupon VARCHAR(10) NULL,
     CreatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
