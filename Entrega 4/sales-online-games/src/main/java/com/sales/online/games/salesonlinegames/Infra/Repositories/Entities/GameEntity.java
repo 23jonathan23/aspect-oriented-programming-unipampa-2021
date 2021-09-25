@@ -16,7 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.GameGenre;
-import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.Platform;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Data;
 
@@ -40,12 +42,13 @@ public class GameEntity implements Serializable {
     @Enumerated
     @Column(name = "gamegenreid")
     public GameGenre gameGenre;
-
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "gameplatform",
             joinColumns = { @JoinColumn(name = "gameid") },
             inverseJoinColumns = { @JoinColumn(name = "platformid") })
-    public List<Platform> platforms;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    public List<PlatformEntity> platforms;
 
     public String developer;
 

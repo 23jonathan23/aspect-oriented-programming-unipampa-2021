@@ -32,7 +32,9 @@ public class GameService {
     public Game createGame(Game request) {
         request.setRelease(LocalDate.now());
 
-        return gameRepository.insertGame(request);
+        var gameInserted = gameRepository.insertGame(request);
+
+        return gameRepository.findGameById(gameInserted.getGameId()).get();
     }
 
     public Game updateGame(long gameId, Game updatedGame) {
