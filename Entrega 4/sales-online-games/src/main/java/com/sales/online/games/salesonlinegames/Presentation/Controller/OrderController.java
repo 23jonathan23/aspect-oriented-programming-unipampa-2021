@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.OrderService;
+import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.DailySalesBody;
+import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.WeeklySalesBody;
 import com.sales.online.games.salesonlinegames.Domain.Core.Game;
 import com.sales.online.games.salesonlinegames.Domain.Core.Order;
 import com.sales.online.games.salesonlinegames.Domain.Core.Request.CreateOrderRequest;
@@ -31,6 +33,16 @@ public class OrderController {
         var response = orderService.getAll();
 
         return new ResponseEntity<>(response ,HttpStatus.OK);
+    }
+
+    @GetMapping("/daily")
+    public DailySalesBody getDailyRelatory() {
+        return orderService.getDailyRelatory();
+    }
+
+    @GetMapping("/weekly")
+    public WeeklySalesBody getDWeeklySalesRelatory() {
+        return orderService.getWeeklySalesBody();
     }
 
     @GetMapping("/{orderId}")

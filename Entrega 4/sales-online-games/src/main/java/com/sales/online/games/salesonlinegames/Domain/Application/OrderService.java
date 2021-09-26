@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IGameRepository;
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IOrderRepository;
+import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.DailySalesBody;
+import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.GameSales;
+import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.WeeklySalesBody;
 import com.sales.online.games.salesonlinegames.Domain.Core.Order;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.OrderStatus;
 
@@ -22,6 +25,16 @@ public class OrderService {
 
     public List<Order> getAll() {
         return orderRepository.getAll();
+    }
+
+    public DailySalesBody getDailyRelatory() {
+
+        return new DailySalesBody(getAll());
+    }
+
+    public WeeklySalesBody getWeeklySalesBody() {
+
+        return new WeeklySalesBody(getAll());
     }
 
     public Order findById(long orderId) {
