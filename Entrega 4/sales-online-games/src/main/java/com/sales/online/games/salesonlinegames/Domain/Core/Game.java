@@ -76,20 +76,7 @@ public class Game{
     }
 
     public void setPlatforms(List<Platform> platforms) {
-        if(this.platforms == null)
-            this.platforms = new ArrayList<>();
-
-        for(var platform : platforms)
-            if (!this.platforms.contains(platform))
-                    this.platforms.add(platform);
-    }
-
-    public void setPlatform(Platform platform) {
-        if(this.platforms == null)
-            this.platforms = new ArrayList<>();
-
-        if (!this.platforms.contains(platform))
-                this.platforms.add(platform);
+        this.platforms = platforms;
     }
 
     public void setDeveloper(String developer) {

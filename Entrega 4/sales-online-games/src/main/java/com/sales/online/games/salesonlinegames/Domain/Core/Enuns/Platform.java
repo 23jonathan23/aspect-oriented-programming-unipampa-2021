@@ -1,6 +1,8 @@
 package com.sales.online.games.salesonlinegames.Domain.Core.Enuns;
 
+
 public enum Platform {
+    UNDEFINED,
     WINDOWS, 
     MAC, 
     LINUX, 
@@ -10,5 +12,5 @@ public enum Platform {
     PLAYSTATION4, 
     NINTENDO_SWITH;
 
-    public final int value = 1 + ordinal();
+    public final long value = ordinal();
 }

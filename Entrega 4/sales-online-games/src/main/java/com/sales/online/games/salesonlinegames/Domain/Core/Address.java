@@ -6,6 +6,8 @@ public class Address {
     private String federativeUnit;
     private String zipCode;
 
+    public Address() { }
+
     public Address(String publicPlace, String city, String federativeUnit, String zipCode){
         this.publicPlace = publicPlace;
         this.city = city;

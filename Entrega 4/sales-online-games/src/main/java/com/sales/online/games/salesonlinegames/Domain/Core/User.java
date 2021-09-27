@@ -5,7 +5,11 @@ public class User {
     private String username;
     private String password;
 
+<<<<<<< HEAD
     public User(){}
+=======
+    public User() { }
+>>>>>>> c095aa8c479a5bc3c9e2f9e11484e73840db3c34
 
     public User(String username, String password) {
         this.username = username;

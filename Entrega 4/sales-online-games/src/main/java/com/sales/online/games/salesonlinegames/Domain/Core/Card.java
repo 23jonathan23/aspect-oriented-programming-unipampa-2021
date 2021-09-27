@@ -6,6 +6,8 @@ public class Card {
     private String dueDate;
     private int cvc;
 
+    public Card() { }
+
     Card(String holderName, String number, String dueDate, int cvc){
         this.holderName = holderName;
         this.number = number;

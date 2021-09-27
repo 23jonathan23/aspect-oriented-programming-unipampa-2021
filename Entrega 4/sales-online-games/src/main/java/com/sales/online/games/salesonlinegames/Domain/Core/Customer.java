@@ -14,7 +14,11 @@ public class Customer{
     private List<GameGenre> favoriteGenres;
     private Address address;
 
+<<<<<<< HEAD
     public Customer(){}
+=======
+    public Customer () { }
+>>>>>>> c095aa8c479a5bc3c9e2f9e11484e73840db3c34
 
     public Customer(String name, String email, LocalDate birthDate, Address address){
         this.name = name;

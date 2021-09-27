@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.sales.online.games.salesonlinegames")
 @EnableJpaRepositories("com.sales.online.games.salesonlinegames.Infra.Repositories")
-@EntityScan("com.sales.online.games.salesonlinegames.Infra.Repositories.Entities")
+@EntityScan("com.sales.online.games.salesonlinegames")
 public class Startup {
 	public static void main(String[] args) {
 		SpringApplication.run(Startup.class, args);

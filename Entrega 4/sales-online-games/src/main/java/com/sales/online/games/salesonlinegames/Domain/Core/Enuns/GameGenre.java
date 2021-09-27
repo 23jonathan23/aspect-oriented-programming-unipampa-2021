@@ -1,6 +1,7 @@
 package com.sales.online.games.salesonlinegames.Domain.Core.Enuns;
 
 public enum GameGenre {
+    UNDEFINED,
     MOBA,
 	FPS,
 	MMO,
@@ -14,5 +15,5 @@ public enum GameGenre {
     SPORTS, 
     RACING;
 
-    public final int value = 1 + ordinal();
+    public final int value = ordinal();
 }
