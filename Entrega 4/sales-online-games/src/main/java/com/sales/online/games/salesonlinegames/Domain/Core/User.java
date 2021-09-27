@@ -1,12 +1,23 @@
 package com.sales.online.games.salesonlinegames.Domain.Core;
 
 public class User {
+    private long userId;
     private String username;
     private String password;
+
+    public User(){}
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

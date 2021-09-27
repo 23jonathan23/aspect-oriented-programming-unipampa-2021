@@ -6,6 +6,7 @@ import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.GameGenre;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.Platform;
 
 public class Customer{
+    private long customerId;
     private String name;
     private String email;
     private LocalDate birthDate;
@@ -13,11 +14,21 @@ public class Customer{
     private List<GameGenre> favoriteGenres;
     private Address address;
 
+    public Customer(){}
+
     public Customer(String name, String email, LocalDate birthDate, Address address){
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
         this.address = address;
+    }
+
+    public long getCustomerId() {
+        return this.customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public String getName() {
