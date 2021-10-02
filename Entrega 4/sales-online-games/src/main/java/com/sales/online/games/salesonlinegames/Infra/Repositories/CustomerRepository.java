@@ -33,31 +33,14 @@ public class CustomerRepository implements ICustomerRepository {
     public Customer insertCustomer(Customer customer) {
         var customerToInsert = modelMapper.map(customer, CustomerEntity.class);
 
-        var favoriteGenresEntity = new ArrayList<GameGenreEntity>();
+        customerToInsert.favoriteGenres = mapGameGenreToGameGenreEntity(customer);
 
-        for(var favoriteGenre : customer.getFavoriteGenres()) {
-            var favoriteGenreEntity = new GameGenreEntity();
-            favoriteGenreEntity.gamegenreid = favoriteGenre.value;
-            
-            favoriteGenresEntity.add(favoriteGenreEntity);
-        }
-
-        customerToInsert.favoriteGenres = favoriteGenresEntity;
-
-        var platformsEntity = new ArrayList<PlatformEntity>();
-
-        for(var platform : customer.getPlatforms()) {
-            var platformEntity = new PlatformEntity();
-            platformEntity.platformid = platform.value;
-            
-            platformsEntity.add(platformEntity);
-        }
-
-        customerToInsert.platforms = platformsEntity;
+        customerToInsert.platforms = mapPlatformToPlatformEntity(customer);
 
         CustomerEntity customerEntity = repository.save(customerToInsert);
 
         customer.setCustomerId(customerEntity.customerId);
+        customer.getAddress().setAddressId(customerEntity.address.addressId);
         
         return customer;
     }
@@ -67,9 +50,15 @@ public class CustomerRepository implements ICustomerRepository {
 
         customerEntity.setCustomerId(customerId);
 
+        customerEntity.favoriteGenres = mapGameGenreToGameGenreEntity(customer);
+
+        customerEntity.platforms = mapPlatformToPlatformEntity(customer);
+
         repository.save(customerEntity);
+
+        customer.setCustomerId(customerId);
         
-        return modelMapper.map(customerEntity, Customer.class);
+        return customer;
     }
 
     public void deleteCustomer(Customer customer) {
@@ -125,5 +114,31 @@ public class CustomerRepository implements ICustomerRepository {
             gameGenres.add(GameGenre.values()[favoriteGenreEntity.gamegenreid.intValue()]);
         
         return gameGenres;
+    }
+
+    private List<GameGenreEntity> mapGameGenreToGameGenreEntity(Customer customer) {
+         var favoriteGenresEntity = new ArrayList<GameGenreEntity>();
+
+        for(var favoriteGenre : customer.getFavoriteGenres()) {
+            var favoriteGenreEntity = new GameGenreEntity();
+            favoriteGenreEntity.gamegenreid = favoriteGenre.value;
+            
+            favoriteGenresEntity.add(favoriteGenreEntity);
+        }
+
+        return favoriteGenresEntity;
+    }
+
+    private List<PlatformEntity> mapPlatformToPlatformEntity(Customer customer) {
+        var platformsEntity = new ArrayList<PlatformEntity>();
+
+        for(var platform : customer.getPlatforms()) {
+            var platformEntity = new PlatformEntity();
+            platformEntity.platformid = platform.value;
+            
+            platformsEntity.add(platformEntity);
+        }
+
+        return platformsEntity;
     }
 }

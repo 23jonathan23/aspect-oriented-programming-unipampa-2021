@@ -4,6 +4,5 @@ CREATE TABLE Address (
     FederativeUnit VARCHAR(2) NOT NULL,
     PublicPlace VARCHAR(100) NOT NULL,
     ZipCode VARCHAR(10) NOT NULL,
-    CustomerId INTEGER NOT NULL REFERENCES Customer(CustomerId),
     CreatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )

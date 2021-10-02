@@ -1,12 +1,21 @@
 package com.sales.online.games.salesonlinegames.Domain.Core;
 
 public class Address {
+    private long addressId;
     private String publicPlace;
     private String city;
     private String federativeUnit;
     private String zipCode;
 
     public Address() { }
+
+    public long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
+    }
 
     public Address(String publicPlace, String city, String federativeUnit, String zipCode){
         this.publicPlace = publicPlace;

@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.MapsId;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,6 +26,7 @@ import lombok.Data;
 @Entity
 @Table(name = "customer")
 public class CustomerEntity implements Serializable {
+    public static final Long serialVersionUID = 1L;
 
     @Id
     @Column(name = "customerid")
@@ -42,10 +42,9 @@ public class CustomerEntity implements Serializable {
     @Column(name = "birthdate")
     public LocalDate birthDate;
 
-    // @OneToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "addreassid", referencedColumnName = "addreassid")
-    // @OnDelete(action = OnDeleteAction.CASCADE)
-    // public AddressEntity address;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "addressid", referencedColumnName = "addressid")
+    public AddressEntity address;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "customerfavoritegenre",
