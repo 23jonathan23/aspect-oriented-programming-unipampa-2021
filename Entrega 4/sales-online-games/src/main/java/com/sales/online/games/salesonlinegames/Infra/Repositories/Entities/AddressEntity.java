@@ -33,6 +33,6 @@ public class AddressEntity implements Serializable {
     @Column(name = "zipcode")
     private String zipCode;
 
-    @Column(name = "customerId")
+    @Column(name = "customerid")
     public long customerId;
 }

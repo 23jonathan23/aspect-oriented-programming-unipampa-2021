@@ -56,8 +56,10 @@ public class CustomerRepository implements ICustomerRepository {
         customerToInsert.platforms = platformsEntity;
 
         CustomerEntity customerEntity = repository.save(customerToInsert);
+
+        customer.setCustomerId(customerEntity.customerId);
         
-        return modelMapper.map(customerEntity, Customer.class);
+        return customer;
     }
 
     public Customer updateCustomer(long customerId, Customer customer) {

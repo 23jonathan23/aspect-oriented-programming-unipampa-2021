@@ -9,6 +9,7 @@ import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.Platform;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -18,6 +19,9 @@ public class CreateCustomerRequest {
 
     @NotBlank
     public String email;
+
+    @NotNull
+    public LocalDate birthDate;
 
     @NotNull
     public List<Platform> platforms;
