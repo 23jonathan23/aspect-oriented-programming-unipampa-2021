@@ -1,11 +1,31 @@
 package com.sales.online.games.salesonlinegames.Domain.Core;
 
+import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.UserType;
+
 public class User {
     private long userId;
     private String username;
     private String password;
+    private UserType userType;
+    private long customerId;
 
     public User(){}
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
 
     public User(String username, String password) {
         this.username = username;
