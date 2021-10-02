@@ -5,5 +5,5 @@ public enum OrderStatus {
     PROCESSING,
     FINISHED;
 
-    public final int value = ordinal();
+    public final long value = ordinal();
 }

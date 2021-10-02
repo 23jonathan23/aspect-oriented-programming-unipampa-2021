@@ -15,5 +15,5 @@ public enum GameGenre {
     SPORTS, 
     RACING;
 
-    public final int value = ordinal();
+    public final long value = ordinal();
 }

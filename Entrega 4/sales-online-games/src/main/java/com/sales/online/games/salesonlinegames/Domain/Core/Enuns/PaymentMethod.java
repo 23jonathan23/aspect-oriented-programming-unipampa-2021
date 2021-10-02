@@ -5,5 +5,5 @@ public enum PaymentMethod {
     DEBIT, 
     CREDIT;
 
-    public final int value = ordinal();
+    public final long value = ordinal();
 }

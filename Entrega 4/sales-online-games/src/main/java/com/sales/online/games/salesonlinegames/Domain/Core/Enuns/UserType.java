@@ -7,5 +7,5 @@ public enum UserType {
     SALER,
     MANAGER;
 
-    public final int value = ordinal();
+    public final long value = ordinal();
 }
