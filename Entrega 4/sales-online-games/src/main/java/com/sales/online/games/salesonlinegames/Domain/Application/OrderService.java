@@ -1,14 +1,15 @@
 package com.sales.online.games.salesonlinegames.Domain.Application;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IGameRepository;
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IOrderRepository;
 import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.DailySalesBody;
-import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.GameSales;
 import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.WeeklySalesBody;
+import com.sales.online.games.salesonlinegames.Domain.Core.Game;
 import com.sales.online.games.salesonlinegames.Domain.Core.Order;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.OrderStatus;
 
@@ -38,10 +39,10 @@ public class OrderService {
     }
 
     public Order findById(long orderId) {
-        Optional<Order> game = orderRepository.findOrderById(orderId);
+        Optional<Order> order = orderRepository.findOrderById(orderId);
 
-        if(game.isPresent())
-            return game.get();
+        if(order.isPresent())
+            return order.get();
 
         return null;
     }
@@ -50,13 +51,18 @@ public class OrderService {
         request.setPurchaseDate(LocalDate.now());
         request.setStatus(OrderStatus.PROCESSING);
 
+        var gamesCompleted = new ArrayList<Game>();
+
         for(var game : request.getGames()) {
             var gameCompleted = gameRepository.findGameById(game.getGameId());
 
             if(gameCompleted.isPresent()) {
                 request.setAmount(request.getAmount() + gameCompleted.get().getPrice());
+                gamesCompleted.add(gameCompleted.get());
             }
         }
+
+        request.setGames(gamesCompleted);
 
         return orderRepository.insertOrder(request);
     }

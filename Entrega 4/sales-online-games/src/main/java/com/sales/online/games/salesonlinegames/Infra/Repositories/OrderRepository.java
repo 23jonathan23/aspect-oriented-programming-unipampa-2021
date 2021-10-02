@@ -35,7 +35,9 @@ public class OrderRepository implements IOrderRepository {
         
         OrderEntity orderEntity = repository.save(orderToInsert);
         
-        return modelMapper.map(orderEntity, Order.class);
+        order.setOrderId(orderEntity.getOrderId());
+
+        return order;
     }
 
     public Order updateOrder(long orderId, Order order) {
@@ -45,16 +47,25 @@ public class OrderRepository implements IOrderRepository {
 
         repository.save(orderEntity);
         
-        return modelMapper.map(orderEntity, Order.class);
+        return order;
     }
 
     public Optional<Order> findOrderById(long orderId) {
         Optional<OrderEntity> orderEntity = repository.findById(orderId);
         
-        if (orderEntity.isPresent())
-            return Optional.of(modelMapper.map(orderEntity.get(), Order.class));
-        else
-            return Optional.empty();
+        if (orderEntity.isPresent()) {
+            var order = modelMapper.map(orderEntity.get(), Order.class);
+
+            var gamesEntity = orderEntity.get().games;
+
+            for (int i = 0; i < gamesEntity.size(); i++) {
+                order.getGames().get(i).setPlatforms(mapPlatformEntityToPlatformEnum(gamesEntity.get(i).platforms));
+            }
+
+            return Optional.of(order);
+        }
+        
+        return Optional.empty();
     }
 
     public List<Order> getAll() {

@@ -50,9 +50,7 @@ public class Order {
     }
 
     public void setGames(List<Game> games) {
-        for(var game : games)
-            if (!this.games.contains(game))
-                    this.games.add(game);
+        this.games = games;
     }
 
     public void setGame(Game game) {
