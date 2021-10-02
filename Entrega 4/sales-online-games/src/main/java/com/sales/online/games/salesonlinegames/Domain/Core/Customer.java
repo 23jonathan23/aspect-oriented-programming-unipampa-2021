@@ -59,7 +59,7 @@ public class Customer{
         return this.platforms;
     }
 
-    public List<GameGenre> getGendersPref() {
+    public List<GameGenre> getFavoriteGenres() {
         return this.favoriteGenres;
     }
 
@@ -71,23 +71,11 @@ public class Customer{
         this.address = address;
     }
 
-    public void removePlatform(Platform platform) {
-        if (platforms.contains(platform))
-            platforms.remove(platform);
+    public void setPlatforms(List<Platform> platforms) {
+        this.platforms = platforms;
     }
 
-    public void addPlatform(Platform platform) {
-        if (!platforms.contains(platform))
-            platforms.add(platform);
-    }
-
-    public void removeFavoriteGenres(GameGenre genre) {
-        if (favoriteGenres.contains(genre))
-            favoriteGenres.remove(genre);
-    }
-
-    public void addFavoriteGenres(GameGenre genre) {
-        if (!favoriteGenres.contains(genre))
-            favoriteGenres.add(genre);
+    public void setFavoriteGenres(List<GameGenre> genres) {
+        favoriteGenres = genres;
     }
 }

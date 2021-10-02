@@ -1,9 +1,13 @@
 package com.sales.online.games.salesonlinegames.Presentation.Configuration;
 
+import com.sales.online.games.salesonlinegames.Domain.Application.CustomerService;
 import com.sales.online.games.salesonlinegames.Domain.Application.GameService;
 import com.sales.online.games.salesonlinegames.Domain.Application.OrderService;
+import com.sales.online.games.salesonlinegames.Domain.Application.UserService;
+import com.sales.online.games.salesonlinegames.Domain.Application.Ports.ICustomerRepository;
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IGameRepository;
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IOrderRepository;
+import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IUserRepository;
 import com.sales.online.games.salesonlinegames.Presentation.Startup;
 
 import org.modelmapper.ModelMapper;
@@ -23,6 +27,16 @@ public class BeanConfiguration {
     @Bean
     OrderService orderService(IOrderRepository orderRepository, IGameRepository gameRepository) {
         return new OrderService(orderRepository, gameRepository);
+    }
+
+    @Bean
+    CustomerService customerService(ICustomerRepository customerRepository) {
+        return new CustomerService(customerRepository);
+    }
+
+    @Bean
+    UserService userService(IUserRepository userRepository) {
+        return new UserService(userRepository);
     }
 
     @Bean
