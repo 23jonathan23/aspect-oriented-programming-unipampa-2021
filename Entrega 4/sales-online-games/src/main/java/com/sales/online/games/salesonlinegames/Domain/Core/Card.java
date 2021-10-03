@@ -1,9 +1,15 @@
 package com.sales.online.games.salesonlinegames.Domain.Core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Card {
     private String holderName;
     private String number;
+
+    @JsonIgnore
     private String dueDate;
+
+    @JsonIgnore
     private int cvc;
 
     public Card() { }

@@ -50,6 +50,16 @@ public class OrderService {
     public Order createOrder(Order request) {
         request.setPurchaseDate(LocalDate.now());
         request.setStatus(OrderStatus.PROCESSING);
+        
+        var card = request.getCard();
+
+        var sixFirstDigits = card.getNumber().substring(0, 6);
+
+        var fourFinalDigits = card.getNumber().substring(card.getNumber().length() - 4);
+
+        var cardWithMask = sixFirstDigits + "********" + fourFinalDigits;
+
+        card.setNumber(cardWithMask);
 
         var gamesCompleted = new ArrayList<Game>();
 
