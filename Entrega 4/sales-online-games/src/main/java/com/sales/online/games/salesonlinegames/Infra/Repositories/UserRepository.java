@@ -27,17 +27,11 @@ public class UserRepository implements IUserRepository {
     ModelMapper modelMapper;
     
     public User insertUser(User user) {
-        UserEntity userEntity = repository.save(modelMapper.map(user, UserEntity.class));
+        var userToInsert = modelMapper.map(user, UserEntity.class);
+
+        userToInsert.customer.customerId = user.getCustomerId();
         
-        return modelMapper.map(userEntity, User.class);
-    }
-
-    public User updateUser(long userId, User user) {
-        var userEntity = modelMapper.map(user, UserEntity.class);
-
-        userEntity.setUserId(userId);
-
-        repository.save(userEntity);
+        UserEntity userEntity = repository.save(userToInsert);
         
         return modelMapper.map(userEntity, User.class);
     }

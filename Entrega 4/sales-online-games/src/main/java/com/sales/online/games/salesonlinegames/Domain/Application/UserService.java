@@ -33,15 +33,6 @@ public class UserService {
         return userRepository.insertUser(user);
     }
 
-    public User updateUser(long userId, User updatedUser) {
-        Optional<User> user = userRepository.findUserById(userId);
-        
-        if(user.isPresent())
-            return userRepository.updateUser(userId, updatedUser);
-        
-        return null;
-    }
-
     public OptionalLong deleteUser(long userId) {
         Optional<User> user = userRepository.findUserById(userId);
         

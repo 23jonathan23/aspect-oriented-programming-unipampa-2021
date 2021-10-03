@@ -4,7 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Card;
-import com.sales.online.games.salesonlinegames.Domain.Core.Game;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.PaymentMethod;
 
 import lombok.Data;

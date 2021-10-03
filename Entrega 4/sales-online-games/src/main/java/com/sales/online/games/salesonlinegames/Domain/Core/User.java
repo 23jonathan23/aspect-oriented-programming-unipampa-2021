@@ -11,6 +11,11 @@ public class User {
 
     public User(){}
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public UserType getUserType() {
         return userType;
     }
@@ -25,11 +30,6 @@ public class User {
 
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     public long getUserId() {

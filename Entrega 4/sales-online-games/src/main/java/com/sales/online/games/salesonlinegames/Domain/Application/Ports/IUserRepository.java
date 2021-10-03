@@ -8,8 +8,6 @@ import java.util.Optional;
 public interface IUserRepository {
     User insertUser(User user);
 
-    User updateUser(long id, User user);
-
     void deleteUser(User user);
 
     Optional<User> findUserById(long userId);

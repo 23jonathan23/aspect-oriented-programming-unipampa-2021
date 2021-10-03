@@ -1,10 +1,14 @@
 package com.sales.online.games.salesonlinegames.Domain.Core.Request;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.UserType;
 
+import lombok.Data;
+
+@Data
 public class CreateUserRequest {
 
     @NotBlank
@@ -16,6 +20,6 @@ public class CreateUserRequest {
     @NotNull
     public UserType userType;
     
-    @NotNull
+    @DecimalMin(value = "0", inclusive = false)
     public long customerId;
 }
