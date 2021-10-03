@@ -4,5 +4,6 @@ CREATE TABLE MarketplaceUser (
     Password VARCHAR(20) NOT NULL,
     UserTypeId INTEGER NOT NULL REFERENCES UserType(UserTypeId),
     CustomerId INTEGER NULL REFERENCES Customer(CustomerId),
-    CreatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    CreatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT username_unique UNIQUE (username)
 )
