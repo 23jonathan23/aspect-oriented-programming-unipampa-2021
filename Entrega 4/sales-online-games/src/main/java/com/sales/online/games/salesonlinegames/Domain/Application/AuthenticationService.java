@@ -24,7 +24,7 @@ public class AuthenticationService {
 
     private static final String ATTRIBUTE_PREFIX = "Bearer ";
 
-    private static final String AUDIENCE = "marketPlaceGame";
+    private static final String AUDIENCE = "marketplacegame.com.br";
 
     private static final String CLAIN_PERMISSION_NAME = "Permission";
 
@@ -50,7 +50,7 @@ public class AuthenticationService {
         if(!authToken.startsWith(ATTRIBUTE_PREFIX))
             return false;
 
-        authToken = authToken.replace(ATTRIBUTE_PREFIX, "");
+        authToken = getTokenWithoutBearerPrefix(authToken);
 
         var audience = JWT.require(Algorithm.HMAC512(TOKEN_PASSWORD))
             .build()
@@ -60,8 +60,8 @@ public class AuthenticationService {
         return audience != null && audience.contains(AUDIENCE);
     }
 
-    public String getUserPermission(String authToken) {
-        authToken = authToken.replace(ATTRIBUTE_PREFIX, "");
+    public String getTokenPermission(String authToken) {
+        authToken = getTokenWithoutBearerPrefix(authToken);
 
         var clain = JWT.require(Algorithm.HMAC512(TOKEN_PASSWORD))
             .build()
@@ -69,6 +69,17 @@ public class AuthenticationService {
             .getClaim(CLAIN_PERMISSION_NAME);
 
         return clain.asString();
+    }
+
+    public String getTokenSubject(String authToken) {
+        authToken = getTokenWithoutBearerPrefix(authToken);
+
+        var subject = JWT.require(Algorithm.HMAC512(TOKEN_PASSWORD))
+            .build()
+            .verify(authToken)
+            .getSubject();
+
+        return subject;
     }
 
     private boolean isMatchesPassword(String informedPassword, String userPassword) {
@@ -91,5 +102,9 @@ public class AuthenticationService {
         authResponse.expiredAt = expiredAt.getTime();
 
         return authResponse;
+    }
+
+    private String getTokenWithoutBearerPrefix(String authToken) {
+        return authToken.replace(ATTRIBUTE_PREFIX, "").replace(" ", "");
     }
 }
