@@ -1,5 +1,6 @@
 package com.sales.online.games.salesonlinegames.Presentation.Configuration;
 
+import com.sales.online.games.salesonlinegames.Domain.Application.AuthenticationService;
 import com.sales.online.games.salesonlinegames.Domain.Application.CustomerService;
 import com.sales.online.games.salesonlinegames.Domain.Application.GameService;
 import com.sales.online.games.salesonlinegames.Domain.Application.OrderService;
@@ -14,6 +15,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @ComponentScan(basePackageClasses = Startup.class)
@@ -40,7 +43,17 @@ public class BeanConfiguration {
     }
 
     @Bean
+    AuthenticationService authenticationService(IUserRepository userRepository) {
+        return new AuthenticationService(userRepository);
+    }
+
+    @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

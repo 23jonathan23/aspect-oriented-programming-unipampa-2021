@@ -59,4 +59,14 @@ public class UserRepository implements IUserRepository {
 
         return response;
     }
+
+    @Override
+    public Optional<User> findUserByUsername(String username) {
+        Optional<UserEntity> userEntity = repository.findByUsername(username);
+        
+        if (userEntity.isPresent())
+            return Optional.of(modelMapper.map(userEntity.get(), User.class));
+        else
+            return Optional.empty();
+    }
 }

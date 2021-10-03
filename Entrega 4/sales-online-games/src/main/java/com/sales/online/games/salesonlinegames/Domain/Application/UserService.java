@@ -7,9 +7,15 @@ import java.util.OptionalLong;
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IUserRepository;
 import com.sales.online.games.salesonlinegames.Domain.Core.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class UserService {
     
     private final IUserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     public UserService(final IUserRepository userRepository) {
         this.userRepository = userRepository;
@@ -29,7 +35,8 @@ public class UserService {
     }
 
     public User createUser(User user) {
-
+        user.setPassword(encoder.encode(user.getPassword()));
+        
         return userRepository.insertUser(user);
     }
 

@@ -12,5 +12,7 @@ public interface IUserRepository {
 
     Optional<User> findUserById(long userId);
 
+    Optional<User> findUserByUsername(String username);
+
     List<User> getAll();
 }
