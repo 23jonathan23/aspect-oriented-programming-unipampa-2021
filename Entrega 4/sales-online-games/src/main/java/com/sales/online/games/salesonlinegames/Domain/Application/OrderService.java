@@ -7,11 +7,11 @@ import java.util.Optional;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IGameRepository;
 import com.sales.online.games.salesonlinegames.Domain.Application.Ports.IOrderRepository;
-import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.DailySalesBody;
-import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.WeeklySalesBody;
 import com.sales.online.games.salesonlinegames.Domain.Core.Game;
 import com.sales.online.games.salesonlinegames.Domain.Core.Order;
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.OrderStatus;
+import com.sales.online.games.salesonlinegames.Domain.Core.Report.DailySalesBody;
+import com.sales.online.games.salesonlinegames.Domain.Core.Report.WeeklySalesBody;
 
 public class OrderService {
     

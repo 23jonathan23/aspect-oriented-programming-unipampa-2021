@@ -1,4 +1,4 @@
-package com.sales.online.games.salesonlinegames.Domain.Application.Relatory;
+package com.sales.online.games.salesonlinegames.Domain.Core.Report;
 
 import java.util.List;
 
@@ -17,25 +17,21 @@ public class DailySalesBody {
     public DailySalesBody(List<Order> orders) {
 
         for (var order : orders) {
-            if (order.getStatus() == OrderStatus.FINISHED && order.getPurchaseDate().compareTo(date) == 0) {
-
+            if (order.getStatus() == OrderStatus.FINISHED 
+                && order.getPurchaseDate().compareTo(date) == 0) {
                 addGameSales(order);
             }
         }
     }
 
     private void addGameSales(Order order) {
-
         for (var game : order.getGames()) {
-
             addGame(game);
         }
     }
 
     private void addGame(Game game) {
-
         for (var sale : gameSales) {
-
             if (sale.getGameId() == game.getGameId()) {
                 sale.addQuantity(1);
                 return;

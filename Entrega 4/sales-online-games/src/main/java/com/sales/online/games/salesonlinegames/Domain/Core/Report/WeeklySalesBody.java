@@ -1,4 +1,4 @@
-package com.sales.online.games.salesonlinegames.Domain.Application.Relatory;
+package com.sales.online.games.salesonlinegames.Domain.Core.Report;
 
 import java.util.List;
 
@@ -29,9 +29,7 @@ public class WeeklySalesBody {
     }
 
     private void addGame(Order order) {
-
         for (var game : order.getGames()) {
-
             addSalePerDeveloper(game);
             addSalePerGenre(game);
             addSalePerPlatform(game);
@@ -39,9 +37,7 @@ public class WeeklySalesBody {
     }
 
     private void addSalePerDeveloper(Game game) {
-
         for (var perDev : perDeveloper) {
-
             if (perDev.getDeveloper().equals(game.getDeveloper())) {
                 perDev.addQuantity(1);
                 return;
@@ -55,7 +51,6 @@ public class WeeklySalesBody {
     }
 
     private void addSalePerGenre(Game game) {
-
         for (var perGen : perGenre) {
 
             if (perGen.getGameGenre() == game.getGameGenre()) {
@@ -71,18 +66,14 @@ public class WeeklySalesBody {
     }
 
     private void addSalePerPlatform(Game game) {
-
         for (var platform : game.getPlatforms()) {
-
             if (platform != null)
                 addPlatform(platform);
         }
     }
 
     private void addPlatform(Platform platform) {
-
         for (var perPlat : perPlatform) {
-
             if (perPlat.getPlatform() == platform) {
                 perPlat.addQuantity(1);
                 return;

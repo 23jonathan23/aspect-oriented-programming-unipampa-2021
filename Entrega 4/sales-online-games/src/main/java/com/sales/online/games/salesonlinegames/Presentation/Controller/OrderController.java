@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 import com.sales.online.games.salesonlinegames.Domain.Application.OrderService;
-import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.DailySalesBody;
-import com.sales.online.games.salesonlinegames.Domain.Application.Relatory.WeeklySalesBody;
 import com.sales.online.games.salesonlinegames.Domain.Core.Game;
 import com.sales.online.games.salesonlinegames.Domain.Core.Order;
+import com.sales.online.games.salesonlinegames.Domain.Core.Report.DailySalesBody;
+import com.sales.online.games.salesonlinegames.Domain.Core.Report.WeeklySalesBody;
 import com.sales.online.games.salesonlinegames.Domain.Core.Request.CreateOrderRequest;
 
 @Controller
@@ -36,13 +36,17 @@ public class OrderController {
     }
 
     @GetMapping("/daily")
-    public DailySalesBody getDailyRelatory() {
-        return orderService.getDailyRelatory();
+    public ResponseEntity<DailySalesBody> getDailyRelatory() {
+        var report = orderService.getDailyRelatory();
+
+        return new ResponseEntity<>(report ,HttpStatus.OK);
     }
 
     @GetMapping("/weekly")
-    public WeeklySalesBody getDWeeklySalesRelatory() {
-        return orderService.getWeeklySalesBody();
+    public ResponseEntity<WeeklySalesBody> getWeeklySalesRelatory() {
+        var report = orderService.getWeeklySalesBody();
+
+        return new ResponseEntity<>(report ,HttpStatus.OK);
     }
 
     @GetMapping("/{orderId}")

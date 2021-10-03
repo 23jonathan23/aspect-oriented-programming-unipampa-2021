@@ -1,4 +1,4 @@
-package com.sales.online.games.salesonlinegames.Domain.Application.Relatory;
+package com.sales.online.games.salesonlinegames.Domain.Core.Report;
 
 import com.sales.online.games.salesonlinegames.Domain.Core.Enuns.Platform;
 
