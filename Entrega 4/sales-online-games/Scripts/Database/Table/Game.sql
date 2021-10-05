@@ -1,0 +1,10 @@
+CREATE TABLE Game (
+    GameId SERIAL PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Description VARCHAR(200) NOT NULL,
+    Developer VARCHAR(50) NOT NULL,
+    Release DATE NOT NULL,
+    PriceInCents BIGINT NOT NULL,
+    GameGenreId INTEGER NULL REFERENCES GameGenre(GameGenreId),
+    CreatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
