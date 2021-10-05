@@ -147,7 +147,7 @@ public class Audition {
 
         Class cl = method.getDeclaringClass();
 
-        String description = "Cadas de objeto da classe ";
+        String description = "Cadastro de objeto da classe ";
 
         switch (cl.getSimpleName()) {
             case "CustomerController":
